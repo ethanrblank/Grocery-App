@@ -15,7 +15,7 @@
 		CCFEE7002196742C0076DFBD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCFEE6FE2196742C0076DFBD /* LaunchScreen.storyboard */; };
 		CCFEE70B2196742C0076DFBD /* GroceriesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFEE70A2196742C0076DFBD /* GroceriesTests.swift */; };
 		CCFEE7162196742C0076DFBD /* GroceriesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFEE7152196742C0076DFBD /* GroceriesUITests.swift */; };
-		CCFEE724219675B20076DFBD /* Meals.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFEE723219675B20076DFBD /* Meals.swift */; };
+		CCFEE724219675B20076DFBD /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFEE723219675B20076DFBD /* Recipe.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +50,7 @@
 		CCFEE7112196742C0076DFBD /* GroceriesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GroceriesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCFEE7152196742C0076DFBD /* GroceriesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceriesUITests.swift; sourceTree = "<group>"; };
 		CCFEE7172196742C0076DFBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CCFEE723219675B20076DFBD /* Meals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meals.swift; sourceTree = "<group>"; };
+		CCFEE723219675B20076DFBD /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +104,7 @@
 				CCFEE6F22196742B0076DFBD /* AppDelegate.swift */,
 				CCFEE6F42196742B0076DFBD /* ViewController.swift */,
 				CCFEE6F62196742B0076DFBD /* Main.storyboard */,
-				CCFEE723219675B20076DFBD /* Meals.swift */,
+				CCFEE723219675B20076DFBD /* Recipe.swift */,
 				CCFEE6FC2196742C0076DFBD /* Assets.xcassets */,
 				CCFEE6FE2196742C0076DFBD /* LaunchScreen.storyboard */,
 				CCFEE7012196742C0076DFBD /* Info.plist */,
@@ -263,7 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCFEE6FB2196742B0076DFBD /* Groceries.xcdatamodeld in Sources */,
-				CCFEE724219675B20076DFBD /* Meals.swift in Sources */,
+				CCFEE724219675B20076DFBD /* Recipe.swift in Sources */,
 				CCFEE6F52196742B0076DFBD /* ViewController.swift in Sources */,
 				CCFEE6F32196742B0076DFBD /* AppDelegate.swift in Sources */,
 			);

@@ -1,6 +1,6 @@
 import Foundation
 
-class Meals {
+class Recipe {
     var name: String = ""
     var ingredients: [String : (Double, String)] = [:]
     
