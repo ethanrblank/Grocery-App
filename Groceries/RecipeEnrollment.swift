@@ -13,6 +13,9 @@ class RecipeEnrollment: UIViewController {
     @IBOutlet weak var recipeNameField: UITextField!
     @IBOutlet weak var ingredientTable: UITableView!
     @IBOutlet weak var addIngredient: UIButton!
+    @IBOutlet weak var editIngredientTableButton: UIButton!
+    
+    var editIngredientButtonSwitch: Bool = false
     
     
     
@@ -21,26 +24,44 @@ class RecipeEnrollment: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        ingredientTable.dataSource = self
-//        ingredientTable.delegate = self
-        // Do any additional setup after loading the view, typically from a nib.
+
     }
     
     
     
     @IBAction func addIngredientTapped(_ sender: Any) {
-        let indexPath: IndexPath = IndexPath(row: ingredientData.count - 1, section: 0)
+        var indexPath: IndexPath = IndexPath(row: ingredientData.count - 1, section: 0)
         let cell = ingredientTable.cellForRow(at: indexPath) as? IngredientCell
-        print(cell?.ingredientUnit.text)
+        guard cell != nil else {
+            ingredientData.append(ingredientData.count)
+            indexPath = IndexPath(row: ingredientData.count - 1, section: 0)
+            ingredientTable.insertRows(at: [indexPath], with: .automatic)
+            return
+        }
         
         guard cell!.ingredientName.text != "" || cell!.ingredientQuantity.text != "" || cell!.ingredientUnit.text != "" else {
             print("missing sections")
             return
         }
         ingredientData.append(ingredientData.count)
-        //let indexPath: IndexPath = IndexPath(row: ingredientData.count - 1, section: 0)
+        indexPath = IndexPath(row: ingredientData.count - 1, section: 0)
         ingredientTable.insertRows(at: [indexPath], with: .automatic)
     }
+    
+    @IBAction func editIngredientButtonTapped(_ sender: Any) {
+        editIngredientButtonSwitch = !editIngredientButtonSwitch
+        guard editIngredientButtonSwitch else {
+            addIngredient.isEnabled = true
+            ingredientTable.setEditing(false, animated: true)
+            editIngredientTableButton.setTitle("Edit", for: .normal)
+            ingredientTable.setEditing(false, animated: true)
+            return
+        }
+        addIngredient.isEnabled = false
+        editIngredientTableButton.setTitle("Done", for: .normal)
+        ingredientTable.setEditing(true, animated: true)
+    }
+    
     
 
     @IBAction func submitButtonTapped(_ sender: Any) {
@@ -50,16 +71,26 @@ class RecipeEnrollment: UIViewController {
         }
         newRecipe.name = recipeNameField.text!
         
-        var allCells: [IngredientCell] = []
-        
         for row in ingredientData {
             let indexPath: IndexPath = IndexPath(row: row, section: 0)
             let cell = ingredientTable.cellForRow(at: indexPath) as? IngredientCell
-            allCells.append(cell!)
+            let ingredientName = cell?.ingredientName.text
+            let ingredientQuantity = cell?.ingredientQuantity.text!.toDouble()
+            let ingredientUnit = cell?.ingredientUnit.text
+            
+            let ingredientAdded: Bool = newRecipe.addIngredient(ingredientName: ingredientName ?? "nil", quantity: ingredientQuantity ?? 0, unit: ingredientUnit ?? "nil")
+            print("\(ingredientName ?? "nil") added: \(ingredientAdded)")
         }
-        print(allCells)
+        
+        
     }
     
+}
+
+extension String {
+    func toDouble() -> Double? {
+        return NumberFormatter().number(from: self)?.doubleValue
+    }
 }
 
 extension RecipeEnrollment: UITableViewDataSource, UITableViewDelegate {
@@ -70,5 +101,10 @@ extension RecipeEnrollment: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ingredientTable.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath) as? IngredientCell
         return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        ingredientData.remove(at: indexPath.row)
+        ingredientTable.deleteRows(at: [indexPath], with: .fade)
     }
 }
