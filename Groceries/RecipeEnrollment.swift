@@ -17,13 +17,25 @@ class RecipeEnrollment: UIViewController {
     
     var editIngredientButtonSwitch: Bool = false
     
-    
-    
+    var fileURL: URL!
+    var recipeBook: RecipeBook = RecipeBook()
     var newRecipe: Recipe = Recipe()
     var ingredientData: [Int] = [0]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        var baseURL: URL?
+        
+        do {
+            baseURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+        } catch {
+            let alert = UIAlertController(title: "Fatal Error", message: "Could not load access User File System", preferredStyle: .alert)
+            self.present(alert, animated: true)
+            return
+        }
+        
+        fileURL = baseURL?.appendingPathComponent("RecipeBooks.txt")
 
     }
     
@@ -81,8 +93,8 @@ class RecipeEnrollment: UIViewController {
             let ingredientAdded: Bool = newRecipe.addIngredient(ingredientName: ingredientName ?? "nil", quantity: ingredientQuantity ?? 0, unit: ingredientUnit ?? "nil")
             print("\(ingredientName ?? "nil") added: \(ingredientAdded)")
         }
-        
-        
+        let recipeAdded: Bool = recipeBook.addRecipe(newRecipe)
+        print("\(recipeNameField.text ?? "nil") added: \(recipeAdded)")
     }
     
 }

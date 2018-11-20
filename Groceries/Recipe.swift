@@ -39,7 +39,7 @@ class Recipe {
     }
     
     func editRecipe(ingredientName: String, quantity: Double, unit: String) -> Bool {
-        guard self.ingredients[ingredientName.lowercased()] != nil else {
+        guard self.ingredients[ingredientName.lowercased()] == nil else {
             return false
         }
         self.ingredients[ingredientName.lowercased()] = (quantity, unit.lowercased())
@@ -47,7 +47,7 @@ class Recipe {
     }
     
     func addIngredient(ingredientName: String, quantity: Double, unit: String) -> Bool {
-        guard self.ingredients[ingredientName.lowercased()] != nil else {
+        guard self.ingredients[ingredientName.lowercased()] == nil else {
             return false
         }
         self.ingredients[ingredientName.lowercased()] = (quantity, unit.lowercased())
@@ -55,7 +55,7 @@ class Recipe {
     }
     
     func deleteIngredient(ingredientName: String) -> Bool {
-        guard self.ingredients[ingredientName.lowercased()] != nil else {
+        guard self.ingredients[ingredientName.lowercased()] == nil else {
             return false
         }
         self.ingredients[ingredientName.lowercased()] = nil
